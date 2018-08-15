@@ -14,7 +14,7 @@ double Inner(double a[3],double b[3]){
 	return k;
 }
 
-void Update(double total[3], double a[3]){
+void Update(double total[3], double a[3],double JT){
 	int i=0,j=0;
 	double B=0;
 	double k1,k2;

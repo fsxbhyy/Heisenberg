@@ -1,21 +1,40 @@
 #include <iostream>
 #include "head.h"
 #include <functional>
-#include <stdio.h> 
+#include <stdlib.h>
+#include <string> 
+#include <fstream>
 #include <math.h> 
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 
 
-
 int main(int argc, char** argv) {
-	FILE *fp;
+	using namespace std;
+	string slabel;
+	string name1="All_";
+	string name2="Select_";
 	FILE *fp1;
 	FILE *fp2;
-	fp=fopen("data.txt","wt");
-	fp1=fopen("data1.txt","wt");
-	fp2=fopen("data2.txt","wt");
+	const char* file1;
+	const char* file2;
+	double JT;
+	if(argc==3){
+		slabel=argv[1];
+		name1=name1+slabel+".txt";
+		name2=name2+slabel+".txt";
+		file1=name1.c_str();
+		file2=name2.c_str();
+		fp1=fopen(file1,"wt");
+		fp2=fopen(file2,"wt");
+	        JT=atof(argv[2]);
+	}
+	else{
+		JT=1.0;
+		fp1=fopen("data1.txt","wt");
+		fp2=fopen("data2.txt","wt");
+	}
 	long long int i; 
     long long int l;
 	long long int j,k,i1;
@@ -24,7 +43,7 @@ int main(int argc, char** argv) {
 	int label;
 	double Z0=0;
 	
-	long long int N=100000000;
+	long long int N=10000000000;
 	double total[3];
 	Spin spgp[NN][NN];
 
@@ -45,7 +64,7 @@ int main(int argc, char** argv) {
 				}
 			} 
 		//	printf("%f %f %f \n",total[0],total[1],total[2]);
-			Update(total,spgp[k1][k2].vector[k3]);
+			Update(total,spgp[k1][k2].vector[k3],JT);
 		//	printf("%f %f %f\n",spgp[k1][k2].vector[k3][0],spgp[k1][k2].vector[k3][1],spgp[k1][k2].vector[k3][2]);
 		}
 		
@@ -80,7 +99,7 @@ int main(int argc, char** argv) {
 				}
 			} 
 		//	printf("%f %f %f \n",total[0],total[1],total[2]);
-			Update(total,spgp[k1][k2].vector[k3]);
+			Update(total,spgp[k1][k2].vector[k3],JT);
 			Z0++;
 			if(k1==0&&k2==0&&k3==1){
 				for(i=0;i<NN;i++){
@@ -105,10 +124,10 @@ int main(int argc, char** argv) {
 		for(i=0;i<NN;i++){
 			for(j=0;j<NN;j++){
 				for(k=0;k<3;k++){
-					spgp[i][j].cor[k]=fabs(spgp[i][j].cor[k]+spgp[i][j].IP[k]*(Z0-spgp[i][j].ZC[k]));					
-					fprintf(fp1,"%f,",spgp[i][j].cor[k]/Z0);
+					spgp[i][j].cor[k]=fabs(spgp[i][j].cor[k]+spgp[i][j].IP[k]*(Z0-spgp[i][j].ZC[k]));								fprintf(fp1,"%f,",spgp[i][j].cor[k]/Z0);
 				}			
 			}
+
 			fprintf(fp1,"\n");
 		}
 		fprintf(fp2,"%lf\n",spgp[0][0].cor[2]/Z0);
@@ -134,7 +153,6 @@ int main(int argc, char** argv) {
 		printf("\n");
 	} */
 	
-	fclose(fp);
 	fclose(fp1);
 	fclose(fp2);	
 
