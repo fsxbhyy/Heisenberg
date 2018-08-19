@@ -11,6 +11,11 @@ Spin::Spin(){
 		this->vector[i][1]=0;
 		this->vector[i][2]=1;
 	}
+	for(i=0;i<20;i++){
+		for(j=0;j<3;j++){
+			this->block[i][j]=0;
+		}
+	}
 }
 
 

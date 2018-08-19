@@ -9,8 +9,9 @@ class Spin{
 	    double cor[3]; //Correlation function
 		double ZC[3]; //counter
 		double IP[3]; //Inner Product
-	
+			
 		double vector[3][3];
+		double block[20][3];
 		Spin();
 };
 
